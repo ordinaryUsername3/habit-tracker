@@ -1,0 +1,1 @@
+This folder is reserved for the react frontend. Setup will begin once backend is completed.
