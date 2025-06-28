@@ -23,13 +23,8 @@ app.use(errorHandler);
 
 app.get('/', (req, res) => res.send('Hello, world!'));
 
-const startServer = async () {
-    try {
-        await connectDB();
-        app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`))
-    } catch (err) {
-        console.error('Startup failed: ', err);
-        process.exit(1);
-    }
+const startServer = async () => {
+    await connectDB();
+    app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`))
 }
 startServer();
