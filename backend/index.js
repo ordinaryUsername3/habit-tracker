@@ -3,6 +3,8 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const notFound = require('./middleware/notFound');
 const errorHandler = require('./middleware/errorHandler');
+const userRoutes = require('./routes/userRoutes');
+const habitRoutes = require('./routes/habitRoutes');
 
 dotenv.config();
 const PORT = process.env.PORT || 8000;
@@ -12,9 +14,8 @@ const app = express();
 //core
 
 
-//routes
-
-
+app.use('/api/habits', habitRoutes);
+app.use('/api/users',userRoutes);
 //not found
 app.use(notFound);
 
