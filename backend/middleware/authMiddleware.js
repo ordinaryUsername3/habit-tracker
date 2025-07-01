@@ -12,13 +12,11 @@ const protect = async (req, res, next) => {
     }
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const user = await User.findById(decoded.id);
-        if (!user) {
-            throw new AppError('user not found', 401);
-        }
-        req.user = user;
+        req.user = {id: decoded.id};
         next();
     } catch(err) {
         throw new AppError('Invalid token, authorization failed', 401);
     }
 }
+
+module.exports = protect;
