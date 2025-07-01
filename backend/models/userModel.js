@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     name: {type: String, required: true, trim: true, lowercase: true},
     age: {type: Number, min: 0, required: true},
     email: {type: String, unique: true, required: true, lowercase: true, trim: true},
-    password: {type: String, minlength:10, required: true}
+    password: {type: String, minlength:10, required: true, select: false} //check if select is the correct way
 },
 {timestamps: true});
 
@@ -16,7 +16,7 @@ userSchema.pre('save',async function(next) {
     next();
 });
 
-userSchema.methods.comaprePassword = async function(enteredPassword) {
+userSchema.methods.comparePassword = async function(enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 }
 
