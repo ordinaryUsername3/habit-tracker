@@ -7,7 +7,7 @@ const addHabit = asyncHandler(
     async (req, res) => {
         const userId = req.user.id;
         const {title, description, frequency, status, streak} = req.body;
-        if (!title || !frequency || !status || !streak) {
+        if (!title || !frequency || !status) {
             throw new AppError('All fields are mandatory except description', 400);
         }
         const newHabit = await Habit.create({
