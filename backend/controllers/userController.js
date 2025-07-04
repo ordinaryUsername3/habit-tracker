@@ -19,7 +19,7 @@ const login = asyncHandler(
         if (!user) {
             throw new AppError('Invalid email or password', 400);
         }
-        if (!(await User.comparePassword(password))) {
+        if (!(await user.comparePassword(password))) {
             throw new AppError('Invalid email or password', 401);
         }
         const token = generateToken(user._id); //should I await
