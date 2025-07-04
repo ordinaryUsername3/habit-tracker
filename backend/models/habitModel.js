@@ -4,7 +4,7 @@ const habitSchema = new mongoose.Schema({
     title: {type: String, required: true, trim: true},
     description: {type: String, default: '', trim: true},
     status: {type: String, required: true, enum: ['completed', 'pending', 'paused']},
-    frequency: {type: Number, required: true, 
+    frequency: {type: String, required: true, 
         emum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Daily', 'Weekly', 'Monthly']
     },
     streak: {type: Number, required: true, default: 0},
