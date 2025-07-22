@@ -6,6 +6,7 @@ const errorHandler = require('./middleware/errorHandler');
 const userRoutes = require('./routes/userRoutes');
 const habitRoutes = require('./routes/habitRoutes');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 dotenv.config();
 const PORT = process.env.PORT || 8000;
@@ -15,6 +16,7 @@ const app = express();
 //core
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 
 
 app.use('/api/habits', habitRoutes);
