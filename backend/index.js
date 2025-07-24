@@ -8,6 +8,8 @@ const habitRoutes = require('./routes/habitRoutes');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
+const corsOptions={origin: "http://localhost:5173/", credentials: true}
+
 dotenv.config();
 const PORT = process.env.PORT || 8000;
 const app = express();
@@ -16,7 +18,7 @@ const app = express();
 //core
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors(corsOptions));
 
 
 app.use('/api/habits', habitRoutes);
