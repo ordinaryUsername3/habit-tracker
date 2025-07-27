@@ -125,4 +125,4 @@ const updatePassword = asyncHandler(
     }
 )
 
-module.exports = {login, logout, signup, getUser, updateUser, deleteUser};
+module.exports = {login, logout, signup, getUser, updateUser, deleteUser, updatePassword};
