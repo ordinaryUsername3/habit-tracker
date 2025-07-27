@@ -24,7 +24,7 @@ const login = asyncHandler(
         }
         const token = generateToken(user._id); //should I await
         setCookies(res, token);
-        return sendRes(res, 200, 'User logged in', {id: user._id, name: user.name, email: user.email}); //does this require data (token)
+        return sendRes(res, 200, 'User logged in', {id: user._id, name: user.name, email: user.email, age: user.age}); //does this require data (token)
     }
 );
 const signup = asyncHandler(
