@@ -98,4 +98,31 @@ const deleteUser = asyncHandler(
     }
 );
 
+const updatePassword = asyncHandler(
+    async (req, res) => {
+        const {currentPassword, newPassword} = req.body;
+
+        if (!currentPassword || !newPassword) {
+            throw new AppError('Please add both current and new password', 400);
+        }
+
+        const user = await User.findById(req.user.id);
+        if (!user) {
+            throw new AppError('Failed to update password', 500);
+        }
+
+        const correctPassword = await User.comparePassword(currentPassword);
+        if (!correctPassword) {
+            throw new AppError('Cannot change password, Incorrect password', 401);
+        }
+
+        const newPasswordUser = await User.findByIdAndUpdate(req.user.id, {password: newPassword})
+        if (!newPasswordUser) {
+            throw new AppError('Failed to update password', 500);
+        }
+
+        return sendRes(res, 200, 'Password changed');
+    }
+)
+
 module.exports = {login, logout, signup, getUser, updateUser, deleteUser};
