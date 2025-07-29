@@ -119,7 +119,6 @@ const updatePassword = asyncHandler(
 
         user.password = newPassword;
         await user.save();
-
         return sendRes(res, 200, 'Password changed');
     }
 )
