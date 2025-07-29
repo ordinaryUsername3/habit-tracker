@@ -6,7 +6,8 @@ const habitSchema = new mongoose.Schema({
     status: {type: String, enum: ['completed', 'pending', 'paused', 'deleted'], default: 'pending'},
     frequency: {type: Number, required: true, min:1, max:7, default: 1},
     streak: {type: Number, default: 0},
-    user: {type: mongoose.Schema.ObjectId, ref: 'User', required: true}
+    user: {type: mongoose.Schema.ObjectId, ref: 'User', required: true},
+    deleteAt: {type: Date, default: null}
 },
 {timestamps: true});
 
