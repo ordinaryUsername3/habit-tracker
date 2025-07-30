@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const URL='http://localhost:5000/api/habits';
+const URL=https:'https://habit-tracker-backend-vxd7.onrender.com/api/habits';
+
 
 export const fetchHabits=createAsyncThunk('habit/fetchHabits', () => {
     return axios.get(URL, {withCredentials: true}).then(
