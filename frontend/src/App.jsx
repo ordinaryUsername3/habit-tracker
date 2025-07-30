@@ -8,14 +8,14 @@ import Header from './components/user/Header'
 import Profile from "./pages/Profile"
 import Home from "./pages/Home"
 import ProtectedRoute from "./components/app/PrivateRoute"
-import { AnimatePresence } from "framer-motion"
+
 
 function App() {
   const location = useLocation();
   const noHeaderPaths = ['/login', '/signup'];
 
   return (
-    <AnimatePresence mode="wait">
+    
     <Box>
       {!noHeaderPaths.includes(location.pathname) && <Header />}
       <Routes>
@@ -30,7 +30,6 @@ function App() {
         </ProtectedRoute>} />
       </Routes>
     </Box>
-    </AnimatePresence>
   )
 }
 
