@@ -8,7 +8,8 @@ const habitRoutes = require('./routes/habitRoutes');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
-const corsOptions={origin: "https://habit-tracker-backend-vxd7.onrender.com", credentials: true}
+const corsOptions={origin: "https://habit-tracker-1-30ao.onrender.com", credentials: true}
+
 
 dotenv.config();
 const PORT = process.env.PORT || 8000;
