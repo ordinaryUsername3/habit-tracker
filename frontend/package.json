@@ -10,7 +10,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "vite preview",
+    "start": "vite preview"
   },
   "keywords": [],
   "author": "",
