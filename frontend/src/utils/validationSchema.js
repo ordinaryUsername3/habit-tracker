@@ -7,15 +7,17 @@ export const loginSchema = yup.object({
 
 export const signupSchema = yup.object({
     name: yup.string().required(),
-    age: yup.number().required('Field is required').min(0).max(100).typeError('Age must be a numerical value'),
+    age: yup.number().required('Field is required').min(1).max(100).typeError('Age must be a numerical value'),
     email: yup.string().required('Field is required').email('Invalid email format'),
-    password: yup.string().required('Field is required').min(10, 'Password must be at least 10 characters'), 
-    confirmPassword: yup.string().required('Please confirm you password').oneOf([yup.ref('password')], 'Passwords must match') 
 })
 
 export const habitSchema = yup.object({
-    title : yup.string().required,
+    title : yup.string().required('Field is required'),
     description: yup.string(),
-    status: yup.string(),
-    frequency: yup.number().min(1).max(7),
-})
+    frequency: yup.number().min(1).max(7).required('Field is required'),
+});
+
+export const passwordSchema = yup.object({
+        currentPassword: yup.string().required('Field is required').min(10, 'Password must be at least 10 characters'),
+        newPassword: yup.string().required('Field is required').min(10, 'Password must be at least 10 characters')  
+});

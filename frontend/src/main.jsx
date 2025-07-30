@@ -6,6 +6,8 @@ import store from './app/store.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react'
 
+
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
