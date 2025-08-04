@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const URL='https://habit-tracker-backend-vxd7.onrender.com/api/habits';
+const URL = import.meta.env.VITE_API_URL + '/api/habits';
 
 
 export const fetchHabits=createAsyncThunk('habit/fetchHabits', () => {

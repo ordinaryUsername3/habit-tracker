@@ -1,5 +1,5 @@
 import axios from "axios";
-const URL='https://habit-tracker-backend-vxd7.onrender.com/api/users';
+const URL = import.meta.env.VITE_API_URL + '/api/users'
 
 
 
