@@ -22,9 +22,10 @@ const login = asyncHandler(
         if (!(await user.comparePassword(password))) {
             throw new AppError('Invalid email or password', 401);
         }
-        const token = generateToken(user._id); //should I await
-        setCookies(res, token);
-        return sendRes(res, 200, 'User logged in', {id: user._id, name: user.name, email: user.email, age: user.age}); //does this require data (token)
+        const refreshToken = generateToken(user._id, process.env.JWT_REFRESH_SECRET); 
+        setCookies(res, refreshToken);
+        const accessToken = generateToken(user._id, process.env.JWT_ACCESS_SECRET);
+        return sendRes(res, 200, 'User logged in', {id: user._id, name: user.name, email: user.email, age: user.age, accessToken}); //does this require data (token)
     }
 );
 const signup = asyncHandler(
@@ -123,4 +124,25 @@ const updatePassword = asyncHandler(
     }
 )
 
-module.exports = {login, logout, signup, getUser, updateUser, deleteUser, updatePassword};
+const refreshToken = asyncHandler(
+    async (req,res) => {
+        const token = req.cookies.token;
+
+        if (!token) throw new AppError('No refresh token provided', 401);
+        const decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
+
+        const userId = decoded.id;
+        const user = await User.findById(userId);
+
+        if (!user) throw new AppError('User not found', 401);
+
+        const accessToken = generateToken(user._id, process.env.JWT_ACCESS_SECRET);
+        const refreshToken = generateToken(user._id, process.env.JWT_REFRESH_SECRET);
+        setCookies(res, refreshToken);
+
+        sendRes(res, 200, 'Token has been refreshed', {accessToken});
+
+    }
+);
+
+module.exports = {login, logout, signup, getUser, updateUser, deleteUser, updatePassword, refreshToken};
