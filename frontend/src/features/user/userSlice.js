@@ -10,7 +10,7 @@ const initialState = {
         email: '',
         _id: null
     },
-    isAuthenticated: false,
+    token: null,
     loading: false,
     error: '',
     status: '',
@@ -24,6 +24,9 @@ const userSlice = createSlice({
     reducers: {
         resetState: () => {
             () => initialState
+        },
+        setToken: (state, action) => {
+            state.token=action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -53,4 +56,4 @@ const userSlice = createSlice({
 
 
 export default userSlice.reducer;
-export const {resetState} = userSlice.actions;
+export const {resetState, setToken} = userSlice.actions;

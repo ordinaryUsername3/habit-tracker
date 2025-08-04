@@ -1,6 +1,6 @@
-import axios from "axios";
 const URL = import.meta.env.VITE_API_URL + '/api/users'
-
+import { authInterceptor } from "./setupInterceptor";
+import axios from 'axios';
 
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -20,19 +20,19 @@ export const loginUser = createAsyncThunk('user/loginUser', (reqData) => {
 })
 
 export const deleteUser=createAsyncThunk('user/deleteUser', () => {
-    return axios.delete(URL+'/', {withCredentials: true}).then(
+    return authInterceptor.delete(URL+'/', {withCredentials: true}).then(
         (res) => res.data
     );
 })
 
 export const updateUser=createAsyncThunk('user/updateUser', (reqData) => {
-    return axios.put(URL+'/', reqData, {withCredentials: true}).then(
+    return authInterceptor.put(URL+'/', reqData, {withCredentials: true}).then(
         (res) => res.data
     )
 });
 
 export const updatePasswordThunk=createAsyncThunk('user/updatePassword', (reqData) => {
-    return axios.put(URL + '/changePassword', reqData, {withCredentials: true}).then(
+    return authInterceptor.put(URL + '/changePassword', reqData, {withCredentials: true}).then(
         res => res.data
     )
 });
