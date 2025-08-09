@@ -3,15 +3,18 @@ import { Box} from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchHabits } from '../features/habit/habitThunk';
+import {getUser} from '../features/user/userThunk';
 import HabitCategory from '../components/habit/HabitCategory';
 
 export default function Home() {
     const dispatch=useDispatch();
-
+    
     useEffect(() => {
-        dispatch(fetchHabits())
+        dispatch(fetchHabits());
+        dispatch(getUser());
         
     }, []);
+    
     const habits = useSelector(state => state.habit.habits);
     //const completedHabits = habits.filter();
 

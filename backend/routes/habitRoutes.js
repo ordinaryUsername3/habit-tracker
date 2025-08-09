@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {addHabit, getHabit, getHabits, updateHabit, deleteHabit, restoreHabit, completeHabit, pauseHabit} = require('./../controllers/habitController');
-const protect = require('./../middleware/authMiddleware');
+const protect = require('./../middleware/headerAuthMiddleware');
 
 
 router.get('/:id', protect, getHabit);

@@ -30,7 +30,7 @@ export default function HabitCategory() {
   return (
     <Box p={6}>
       {/* Filter Buttons */}
-      <ButtonGroup mb={6} isAttached colorScheme="green" size="sm" variant="solid">
+      <ButtonGroup mb={6} isAttached size="sm" variant="solid">
         {filters.map(status => (
           <Button
             key={status}
@@ -54,9 +54,7 @@ export default function HabitCategory() {
               align="center"
               p={4}
               borderWidth="1px"
-              borderColor='green.300'
               borderRadius="md"
-              bg='green.50'
               boxShadow="md"
             >
               <Text fontWeight="semibold" fontSize="md" color="green.800">
@@ -66,7 +64,6 @@ export default function HabitCategory() {
               {(filter === "paused" || filter === "deleted") && (
                 <Button
                   size="sm"
-                  colorScheme="green"
                   variant="outline"
                   onClick={() => handleRestore(habit._id)}
                 >

@@ -1,23 +1,22 @@
 import axios from 'axios';
 const URL=import.meta.env.VITE_API_URL + '/api/users';
-import store from '../../app/store'
-import { setToken } from './userSlice';
 
 
-export const authInterceptor = axios.create({
-    withCredentials: true,
+const instance = axios.create({
     baseURL: URL,
-});
+    withCredentials: true
+})
 
-authInterceptor.interceptors.request.use((config) => {
-    const token = store.getState().user.token;
-    if (token) {
-        config.headers['Authorization']=`Bearer ${token}`
+
+instance.interceptors.request.use((config) => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+        config.headers['Authorization']=`Bearer ${accessToken}`;
     }
     return config
 }, (error) => Promise.reject(error));
 
-export const refreshTokenInterceptor = authInterceptor.interceptors.response.use(
+instance.interceptors.response.use(
     (res) => res,
     async (error) => {
         const originalRequest = error.config;
@@ -25,17 +24,18 @@ export const refreshTokenInterceptor = authInterceptor.interceptors.response.use
             originalRequest._retry = true
             try {            
                 const response = await axios.post(URL + '/refresh', {}, {withCredentials: true})
-                const newAccessToken = response.data?.token;
+                const newAccessToken = response.data?.accessToken;
                 if (newAccessToken) {
-                    store.dispatch(setToken(newAccessToken));
+                    localStorage.setItem('accessToken', newAccessToken);
 
                     originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`
-                    return authInterceptor(originalRequest);
+                    return instance(originalRequest);
                 }
             } catch (refreshError) {
-                console.error('Token refresh failed', refreshError)
                 return Promise.reject(refreshError);
             }
         }
     }
 )
+
+export default instance;

@@ -1,5 +1,3 @@
-
-
 export const handlePending = (state) => {
             state.loading=true
         }
@@ -10,12 +8,10 @@ export const handleRejected = (state, action) => {
 }
 export const setUserData = (state, action) => {
         state.loading=false
-        state.user.name=action.payload.name
-        state.user.age=action.payload.age
-        state.user.email=action.payload.email
-        state.user._id = action.payload._id
+        state.user=action.payload
         state.isAuthenticated=true
         state.status='success'
+        localStorage.setItem('accessToken', action.payload.accessToken);
 }
 export const updateUserData = (state, action) => {
     console.log(action.payload);
@@ -36,10 +32,17 @@ export const deleteUserReducer = (state, action) => {
 
 export const logout=(state, action)=> {
     state.status=action.payload;
-    state.loading=false
+    state.loading=false;
+    localStorage.clear()
 }
 
 export const updatePassword=(state, action)=> {
     state.loading= false;
     state.status=action.payload.message;
+}
+
+export const getUserReducer = (state, action) => {
+    state.loading = false;
+    state.user = action.payload;
+    state.status = 'success';
 }

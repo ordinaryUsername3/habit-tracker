@@ -22,7 +22,6 @@ export default function PasswordForm() {
         spacing="6"
         py="8"
         px="4"
-        bg="green.50"
         borderRadius="md"
         boxShadow="lg"
         maxW="md"
@@ -44,9 +43,6 @@ export default function PasswordForm() {
         <Button
           type="submit"
           width="full"
-          colorScheme="green"
-          bg="green.400"
-          _hover={{ bg: "green.500" }}
           fontWeight="bold"
         >
           Change Password

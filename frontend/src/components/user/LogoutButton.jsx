@@ -1,8 +1,9 @@
-import { Button } from "@chakra-ui/react";
-import { logoutUser } from "../../features/user/userThunk";
+import { Button, Icon } from "@chakra-ui/react";
 import { resetState } from "../../features/user/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { IoLogOut } from "react-icons/io5";
+import { logoutUser } from "../../features/user/userThunk";
 
 export default function LogoutButton() {
   const dispatch = useDispatch();
@@ -10,28 +11,24 @@ export default function LogoutButton() {
 
   async function handleLogout() {
     try {
-      await dispatch(logoutUser())
+      await dispatch(logoutUser());
       dispatch(resetState());
       navigate("/login");
     } catch (error) {
       console.error(`Logout failed, ${error.message}`);
     }
-
   }
 
   return (
     <Button
       onClick={handleLogout}
-      size="sm"
-      bg="green.600"
-      color="white"
-      fontWeight="bold"
-      px={4}
-      py={2}
-      borderRadius="md"
-      transition="all 0.2s ease-in-out"
-      _hover={{ bg: "green.700", transform: "scale(1.02)" }}
+      colorScheme="green"
+      backgroundColor="green.500"
+      _hover={{ backgroundColor: "green.600" }}
     >
+      <Icon colorScheme="green" alignSelf='center'>
+        <IoLogOut />
+      </Icon>
       Logout
     </Button>
   );

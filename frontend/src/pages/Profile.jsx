@@ -16,14 +16,12 @@ export default function Profile() {
     return (
         <Box>  
             <VStack >
-                <AvatarGroup alignSelf='center'>
+                <AvatarGroup title={name} padding={3} size='2xl' alignSelf='center'>
                     <Avatar.Root>
                         <Avatar.Fallback name={name}/>
                         {/*Add Avatar Image*/}
                     </Avatar.Root>
                 </AvatarGroup>
-           
-            
 <Formik
   validationSchema={signupSchema}
   initialValues={{ name, age, email }}
@@ -38,7 +36,6 @@ export default function Profile() {
         py="8"
         px="4"
         alignItems="center"
-        bg="green.50"
         borderRadius="md"
         boxShadow="lg"
         maxW="md"
@@ -65,9 +62,6 @@ export default function Profile() {
         <Button
           type="submit"
           width="full"
-          colorScheme="green"
-          bg="green.400"
-          _hover={{ bg: "green.500" }}
           fontWeight="bold"
         >
           Update

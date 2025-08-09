@@ -3,15 +3,16 @@ import {
   Dialog,
   Button,
   CloseButton,
-  useDisclosure,
 } from '@chakra-ui/react';
 import UpdateHabitForm from './../habit/UpdateHabitForm';
+import { useState } from 'react';
 
 export default function ViewHabit({ habitId }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClose = () => setIsOpen(false);
 
   return (
-    <Dialog.Root open={isOpen} onOpenChange={(open) => open ? onOpen() : onClose()}>
+    <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
       <Dialog.Trigger asChild>
         <Button variant="outline" size="sm">
           View Habit
@@ -21,17 +22,13 @@ export default function ViewHabit({ habitId }) {
         <Dialog.Backdrop />
         <Dialog.Positioner>
           <Dialog.Content>
-            <Dialog.Header>
+            <Dialog.Header justifyContent={'space-between'} alignItems='center'>
               <Dialog.Title>View Habit</Dialog.Title>
+              <CloseButton onClick={handleClose} />
             </Dialog.Header>
             <Dialog.Body>
-              <UpdateHabitForm onClose={onClose} habitId={habitId} />
+              <UpdateHabitForm habitId={habitId} onClose={handleClose}/>
             </Dialog.Body>
-            <Dialog.Footer>
-              <Dialog.CloseTrigger asChild>
-                <CloseButton />
-              </Dialog.CloseTrigger>
-            </Dialog.Footer>
           </Dialog.Content>
         </Dialog.Positioner>
       </Portal>

@@ -1,7 +1,8 @@
-import { signupUser, loginUser, deleteUser, updateUser, logoutUser, updatePasswordThunk } from "./userThunk";
 import { createSlice } from "@reduxjs/toolkit";
-import { handlePending, handleRejected, updateUserData, setUserData, deleteUserReducer, logout, updatePassword } from "./userReducer";
+import {signupUser, loginUser, deleteUser, updateUser, logoutUser, updatePasswordThunk, getUser } from "./userThunk";
+import { handlePending, handleRejected, updateUserData, setUserData, deleteUserReducer, logout, updatePassword, getUserReducer } from "./userReducer";
 
+//fix Reference error issue for my thunks
 
 const initialState = {
     user: {
@@ -10,23 +11,20 @@ const initialState = {
         email: '',
         _id: null
     },
-    token: null,
+    isAuthenticated: !!localStorage.getItem('accessToken'),
     loading: false,
     error: '',
     status: '',
 }
 
 
-
 const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        resetState: () => {
-            () => initialState
-        },
-        setToken: (state, action) => {
-            state.token=action.payload;
+        resetState: () => initialState,
+        setIsAuthenticated: (state, action) => {
+            state.isAuthenticated = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -49,6 +47,10 @@ const userSlice = createSlice({
         .addCase(updatePasswordThunk.rejected, handleRejected)
         .addCase(updatePasswordThunk.pending, handlePending)
         .addCase(updatePasswordThunk.fulfilled, updatePassword)
+        .addCase(getUser.pending, handlePending)
+        .addCase(getUser.rejected, handleRejected)
+        .addCase(getUser.fulfilled, getUserReducer)
+
 
     }
     

@@ -8,13 +8,17 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { completeHabit, pauseHabit } from '../../features/habit/habitThunk';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import DeleteHabit from '../habit/DeleteHabit';
 import ViewHabit from '../habit/ViewHabit';
 import AddHabit from '../habit/AddHabit';
+import capitalizeName from '../../utils/capitalzeName';
+import SkeletonComponent from '../app/Skeleton';
 
 const Dashboard = ({ habits }) => {
   const dispatch = useDispatch();
+  const name = capitalizeName(useSelector((state) => state.user.user.name));
+  const loading = useSelector((state) => state.habit.loading);
 
   function handleComplete(habitId) {
     dispatch(completeHabit(habitId));
@@ -29,14 +33,16 @@ const Dashboard = ({ habits }) => {
   const pendingHabits = habits.filter((h) => h.status === 'pending');
   const pausedHabits = habits.filter((h) => h.status === 'paused');
 
-  return (
-    <Box p={6} bg="gray.50" minH="100vh">
+  if (loading) {
+    return <SkeletonComponent />;
+  } else return (
+        <Box p={6} minH="100vh">
       <Flex margin={5} alignItems='center' justifyContent='flex-end'>
         <AddHabit />
       </Flex>
       {/* Header */}
       <Heading size="lg" mb={4} color="teal.700">
-        Welcome Back!
+        Welcome Back! {name}
       </Heading>
 
       {/* Stats Summary */}
@@ -48,7 +54,7 @@ const Dashboard = ({ habits }) => {
           { label: 'Paused', count: pausedHabits.length, color: 'yellow.500' },
           { label: 'Deleted', count: deletedHabits.length, color: 'red.500' }
         ].map((stat, idx) => (
-          <Box key={idx} bg="white" p={4} borderRadius="md" shadow="md">
+          <Box key={idx} p={4} borderRadius="md" shadow="md">
             <Text fontWeight="bold" color="gray.700">{stat.label}:</Text>
             <Text fontSize="lg" color={stat.color}>{stat.count}</Text>
           </Box>
@@ -64,7 +70,7 @@ const Dashboard = ({ habits }) => {
             borderColor="gray.200"
             borderRadius="lg"
             p={4}
-            bg="white"
+            margin={1}
             boxShadow="base"
             transition="all 0.2s ease-in-out"
             _hover={{ boxShadow: 'lg', transform: 'scale(1.01)' }}
@@ -76,13 +82,7 @@ const Dashboard = ({ habits }) => {
                 py={1}
                 borderRadius="full"
                 fontSize="0.75rem"
-                bg={
-                  habit.status === 'completed'
-                    ? 'green.500'
-                    : habit.status === 'paused'
-                    ? 'yellow.400'
-                    : 'blue.500'
-                }
+                bg='orange.400'
                 color="white"
               >
                 {habit.status}
@@ -123,7 +123,7 @@ const Dashboard = ({ habits }) => {
         ))}
       </SimpleGrid>
     </Box>
-  );
+  )
 };
 
 export default Dashboard;

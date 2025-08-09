@@ -1,6 +1,8 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Text, Image } from "@chakra-ui/react";
 import LogoutButton from "../user/LogoutButton";
 import { useNavigate } from "react-router-dom";
+import ColorModeSwitcher from "./../app/toggleMode";
+
 
 export default function Header() {
   const navigate = useNavigate();
@@ -31,8 +33,13 @@ export default function Header() {
       color="whiteAlpha.900"
       boxShadow="md"
     >
+      <Flex 
+      alignItems='center'
+      cursor="pointer"
+      onClick={() => navigate("/")}
+      >
+      <Image borderRadius='sm' src="/ordinaryHabitsFavicon.png" alt="Logo" boxSize="3.5rem" mr={4}/>
       <Text
-        onClick={() => navigate("/")}
         fontSize="xl"
         fontWeight="bold"
         cursor="pointer"
@@ -41,6 +48,7 @@ export default function Header() {
       >
         Habit Tracker
       </Text>
+      </Flex>
 
       <Flex gap={3}>
         <Text
@@ -58,8 +66,11 @@ export default function Header() {
           Profile
         </Text>
       </Flex>
+      <Flex gap={1}>
+        <ColorModeSwitcher />
+        <LogoutButton />
+      </Flex>
 
-      <LogoutButton />
     </Flex>
   );
 }

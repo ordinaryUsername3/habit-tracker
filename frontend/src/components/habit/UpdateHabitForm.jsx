@@ -17,37 +17,32 @@ export default function UpdateHabitForm({ habitId, onClose }) {
     <Formik
       initialValues={{ title, description, status, streak, frequency }}
       validationSchema={habitSchema}
-      onSubmit={async (values, { resetForm }) => {
-        await dispatch(updateHabit({ reqData: values, id: habitId }));
-        resetForm();
-        onClose();
-      }}
     >
       {() => (
         <Stack alignItems="center" spacing={4}>
-          <Form style={{ width: "100%" }}>
+          <Form 
+          style={{ width: "100%" }}
+          onSubmit={async (values, { resetForm }) => {
+        await dispatch(updateHabit({ reqData: values, id: habitId }));
+        resetForm();
+        onClose();
+        
+      }}>
             <InputField name="title" label="Title" />
             <InputField name="description" label="Description" />
             <InputField name="status" label="Status" />
             <InputField name="frequency" label="Frequency" />
-            <InputField name="streak" label="Streak" />
+            <InputField name="streak" label="Streak" disabled={true}/>
 
             <Button
               type="submit"
-              bg="white"
-              color="green.600"
-              border="2px solid"
-              borderColor='green.400'
-              _hover={{
-                bg: 'green.50',
-                borderColor: "green.600",
-              }}
               px={5}
               py={3}
               borderRadius="md"
               fontWeight="semibold"
               transition="all 0.2s ease-in-out"
               width="100%"
+              margin={1}
             >
               Update Habit
             </Button>

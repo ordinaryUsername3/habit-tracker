@@ -1,29 +1,29 @@
 import {Dialog, Portal, CloseButton, Button, Box} from '@chakra-ui/react'
 import AddHabitForm from './../habit/AddHabitForm'
+import { useState } from 'react'
 
 export default function AddHabit() {
+    const [isOpen, setIsOpen] = useState(false);
+    const handleClose = () => setIsOpen(false);
 
     return (
         <Box>
-            <Dialog.Root>
+            <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
                 <Dialog.Trigger asChild>
-                    <Button backgroundColor='white' color='gray.500' borderColor='gray.600' _hover={{backgroundColor: 'gray.50'}}>Add Habit</Button>
+                    <Button
+                    >Add Habit</Button>
                 </Dialog.Trigger>
                 <Portal>
                     <Dialog.Backdrop />
                     <Dialog.Positioner>
                         <Dialog.Content>
-                            <Dialog.Header>
-                                <Dialog.Title>Add Habit</Dialog.Title>
+                            <Dialog.Header alignItems='center' justifyContent='space-between'>
+                                <Dialog.Title>Add Habit</Dialog.Title>   
+                                <CloseButton onClick={handleClose} />                             
                             </Dialog.Header>
                             <Dialog.Body>
-                                <AddHabitForm />
+                                <AddHabitForm closeModal={handleClose}/>
                             </Dialog.Body>
-                            <Dialog.Footer>
-                                <Dialog.CloseTrigger asChild>
-                                    <CloseButton />
-                                </Dialog.CloseTrigger>
-                            </Dialog.Footer>
                         </Dialog.Content>
                     </Dialog.Positioner>
                 </Portal>

@@ -3,17 +3,21 @@ import InputField from "../../components/app/InputField"
 import { Button, Stack } from "@chakra-ui/react"
 import { useDispatch } from "react-redux"
 import { addHabit } from "../../features/habit/habitThunk"
+import {habitSchema} from './../../utils/validationSchema'
 
-export default function AddHabitForm() {
+export default function AddHabitForm({closeModal}) {
     const dispatch = useDispatch();
 
     return (
         <Formik
         initialValues={{title: '', description: '', status: '',  frequency: ''}}
         onSubmit={(values, {resetForm}) => {
+            values.status = values.status ?? 'pending';
             dispatch(addHabit(values))
             resetForm();
+            closeModal(); 
         }}
+        validationSchema={habitSchema}
         >
             {() => (
                 <Stack alignItems='center'>

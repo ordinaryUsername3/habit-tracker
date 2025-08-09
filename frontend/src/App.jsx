@@ -8,6 +8,9 @@ import Header from './components/user/Header'
 import Profile from "./pages/Profile"
 import Home from "./pages/Home"
 import ProtectedRoute from "./components/app/PrivateRoute"
+import {Toaster} from './components/ui/toaster'
+
+
 
 
 function App() {
@@ -15,8 +18,8 @@ function App() {
   const noHeaderPaths = ['/login', '/signup'];
 
   return (
-    
     <Box>
+      <Toaster />
       {!noHeaderPaths.includes(location.pathname) && <Header />}
       <Routes>
         <Route path="/" element={<ProtectedRoute>
