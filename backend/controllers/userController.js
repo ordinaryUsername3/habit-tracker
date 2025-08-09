@@ -1,5 +1,3 @@
-const express = require('express');
-const protect = require('./../middleware/authMiddleware');
 const asyncHandler = require('express-async-handler');
 const AppError = require('./../utils/AppError');
 const User = require('./../models/userModel');

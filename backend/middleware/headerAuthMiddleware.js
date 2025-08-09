@@ -10,7 +10,13 @@ const protect = asyncHandler(
     const token = authHeader && authHeader.split(" ")[1];
 
     if (!token) throw new AppError('No token, No authorization', 401);
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    let decoded;
+    try {
+        decoded = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
+    } catch (err) {
+        throw new AppError('Invalid token or expired token', 401);
+    }
+    
 
     const userId = decoded.id;
     const user = await User.findById(userId);
