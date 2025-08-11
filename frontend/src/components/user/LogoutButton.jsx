@@ -25,6 +25,7 @@ export default function LogoutButton() {
       colorScheme="green"
       backgroundColor="green.500"
       _hover={{ backgroundColor: "green.600" }}
+      aria-label="logout"
     >
       <Icon colorScheme="green" alignSelf='center'>
         <IoLogOut />

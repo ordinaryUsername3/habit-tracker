@@ -43,6 +43,7 @@ export default function UpdateHabitForm({ habitId, onClose }) {
               transition="all 0.2s ease-in-out"
               width="100%"
               margin={1}
+              aria-label="update habit details"
             >
               Update Habit
             </Button>

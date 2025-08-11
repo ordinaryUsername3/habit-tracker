@@ -14,8 +14,9 @@ import ViewHabit from '../habit/ViewHabit';
 import AddHabit from '../habit/AddHabit';
 import capitalizeName from '../../utils/capitalzeName';
 import SkeletonComponent from '../app/Skeleton';
+import { completedHabitsSelector, pausedHabitsSelector, pendingHabitsSelector, deletedHabitsSelector } from '../../features/habit/habitSelectors';
 
-const Dashboard = ({ habits }) => {
+const Dashboard = () => {
   const dispatch = useDispatch();
   const name = capitalizeName(useSelector((state) => state.user.user.name));
   const loading = useSelector((state) => state.habit.loading);
@@ -28,10 +29,12 @@ const Dashboard = ({ habits }) => {
     dispatch(pauseHabit(habitId));
   }
 
-  const completedHabits = habits.filter((h) => h.status === 'completed');
-  const deletedHabits = habits.filter((h) => h.status === 'deleted');
-  const pendingHabits = habits.filter((h) => h.status === 'pending');
-  const pausedHabits = habits.filter((h) => h.status === 'paused');
+  const completedHabits = useSelector(completedHabitsSelector);
+  const deletedHabits = useSelector(deletedHabitsSelector);
+  const pausedHabits = useSelector(pausedHabitsSelector);
+  const pendingHabits = useSelector(pendingHabitsSelector);
+  const totalHabits = completedHabits.length + deletedHabits.length + pendingHabits.length
+  + pausedHabits.length
 
   if (loading) {
     return <SkeletonComponent />;
@@ -48,7 +51,7 @@ const Dashboard = ({ habits }) => {
       {/* Stats Summary */}
       <Flex mb={8} wrap="wrap" gap={6}>
         {[
-          { label: 'Total Habits', count: habits.length, color: 'purple.500' },
+          { label: 'Total Habits', count:totalHabits, color: 'purple.500' },
           { label: 'Completed', count: completedHabits.length, color: 'green.600' },
           { label: 'Pending', count: pendingHabits.length, color: 'blue.600' },
           { label: 'Paused', count: pausedHabits.length, color: 'yellow.500' },
@@ -105,6 +108,7 @@ const Dashboard = ({ habits }) => {
                 color="white"
                 _hover={{ bg: 'red.600' }}
                 onClick={() => handleComplete(habit._id)}
+                aria-label='complete habit'
               >
                 Complete
               </Button>
@@ -115,6 +119,7 @@ const Dashboard = ({ habits }) => {
                 color="black"
                 _hover={{ bg: 'yellow.500' }}
                 onClick={() => handlePause(habit._id)}
+                aria-label='pause habit'
               >
                 Pause
               </Button>

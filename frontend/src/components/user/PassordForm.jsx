@@ -44,6 +44,7 @@ export default function PasswordForm() {
           type="submit"
           width="full"
           fontWeight="bold"
+          aria-label="change password"
         >
           Change Password
         </Button>

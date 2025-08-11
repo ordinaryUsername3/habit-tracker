@@ -18,7 +18,7 @@ export default function DeleteUser() {
     return (
         <Dialog.Root>
             <Dialog.Trigger asChild>
-                <Button>Delete Account</Button>
+                <Button aria-label="delete user account">Delete Account</Button>
             </Dialog.Trigger>
             <Portal>
                 <Dialog.Backdrop />
@@ -32,9 +32,9 @@ export default function DeleteUser() {
                         </Dialog.Body>
                         <Dialog.Footer>
                             <Dialog.ActionTrigger asChild>
-                                <CloseButton>Cancel</CloseButton>
+                                <CloseButton aria-label="cancel habit delete">Cancel</CloseButton>
                             </Dialog.ActionTrigger>
-                            <Button onClick={handleDeleteUser}>Confirm</Button>
+                            <Button aria-label="Confirm account deletion" onClick={handleDeleteUser}>Confirm</Button>
                         </Dialog.Footer>
                     </Dialog.Content>
                 </Dialog.Positioner>

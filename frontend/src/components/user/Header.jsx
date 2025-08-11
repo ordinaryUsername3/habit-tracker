@@ -45,6 +45,7 @@ export default function Header() {
         cursor="pointer"
         _hover={{ color: "whiteAlpha.800" }}
         transition="all 0.2s ease"
+        aria-label="Site name"
       >
         Habit Tracker
       </Text>

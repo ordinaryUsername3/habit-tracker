@@ -10,14 +10,38 @@ import {
 } from "@chakra-ui/react";
 import { restoreHabit } from "../../features/habit/habitThunk";
 import EmptyState from "./EmptyState";
+import { completedHabitsSelector, deletedHabitsSelector, pendingHabitsSelector, pausedHabitsSelector } from "../../features/habit/habitSelectors";
 
 export default function HabitCategory() {
-  const habits = useSelector(state => state.habit.habits);
+
+
   const dispatch = useDispatch();
   const [filter, setFilter] = useState("pending");
   const message = `No ${filter} habits yet! 🎉`;
+  let habitsDisplayed;
 
-  const habitsDisplayed = habits.filter(h => h.status === filter);
+  const completedHabits = useSelector(completedHabitsSelector);
+  const pendingHabits = useSelector(pendingHabitsSelector);
+  const pausedHabits = useSelector(pausedHabitsSelector);
+  const deletedHabits = useSelector(deletedHabitsSelector);
+
+  switch (filter) {
+    case 'pending':
+      habitsDisplayed = pendingHabits
+      break;
+    case 'completed':
+      habitsDisplayed = completedHabits
+      break;
+    case 'pasued':
+      habitsDisplayed = pausedHabits
+      break;
+    case 'deleted':
+      habitsDisplayed = deletedHabits
+      break;
+    default:
+      habitsDisplayed = []
+  }
+  
 
   const handleRestore = (id) => {
     dispatch(restoreHabit(id));

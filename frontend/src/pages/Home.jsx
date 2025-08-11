@@ -1,6 +1,6 @@
 import Dashboard from './../components/user/Dashboard'
 import { Box} from '@chakra-ui/react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchHabits } from '../features/habit/habitThunk';
 import {getUser} from '../features/user/userThunk';
@@ -15,12 +15,10 @@ export default function Home() {
         
     }, []);
     
-    const habits = useSelector(state => state.habit.habits);
-    //const completedHabits = habits.filter();
 
     return (
         <Box>
-            <Dashboard habits={habits}/>
+            <Dashboard />
             <HabitCategory />
         </Box>
     );

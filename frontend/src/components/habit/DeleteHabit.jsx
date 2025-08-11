@@ -13,7 +13,7 @@ export default function DeleteHabit({habitId}) {
     return (
         <Dialog.Root>
             <Dialog.Trigger asChild>
-                <IconButton><FaTrash /></IconButton>
+                <IconButton aria-label="delete habit"><FaTrash /></IconButton>
             </Dialog.Trigger>
             <Portal>
                 <Dialog.Backdrop />
@@ -29,7 +29,7 @@ export default function DeleteHabit({habitId}) {
                             <Dialog.CloseTrigger asChild>
                                 <CloseButton />
                             </Dialog.CloseTrigger>
-                            <Button onClick={handleDelete}>Confirm</Button>
+                            <Button aria-label="confirm habit deletion" onClick={handleDelete}>Confirm</Button>
                         </Dialog.Footer>
                     </Dialog.Content>
                 </Dialog.Positioner>

@@ -10,7 +10,7 @@ export default function AddHabit() {
         <Box>
             <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
                 <Dialog.Trigger asChild>
-                    <Button
+                    <Button aria-label='trigger add habit dialog'
                     >Add Habit</Button>
                 </Dialog.Trigger>
                 <Portal>
@@ -19,10 +19,10 @@ export default function AddHabit() {
                         <Dialog.Content>
                             <Dialog.Header alignItems='center' justifyContent='space-between'>
                                 <Dialog.Title>Add Habit</Dialog.Title>   
-                                <CloseButton onClick={handleClose} />                             
+                                <CloseButton aria-label='close add habit dialog' onClick={handleClose} />                             
                             </Dialog.Header>
                             <Dialog.Body>
-                                <AddHabitForm closeModal={handleClose}/>
+                                <AddHabitForm  closeModal={handleClose}/>
                             </Dialog.Body>
                         </Dialog.Content>
                     </Dialog.Positioner>
