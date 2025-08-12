@@ -22,7 +22,7 @@ const login = asyncHandler(
         }
         const refreshToken = generateToken(user._id, process.env.JWT_REFRESH_SECRET); 
         setCookies(res, refreshToken);
-        const accessToken = generateToken(user._id, process.env.JWT_ACCESS_SECRET);
+        const accessToken = generateToken(user._id, process.env.JWT_ACCESS_SECRET, 'access');
         return sendRes(res, 200, 'User logged in', {id: user._id, name: user.name, email: user.email, age: user.age, accessToken}); //does this require data (token)
     }
 );
@@ -48,9 +48,10 @@ const signup = asyncHandler(
             throw new AppError('Unexpected error during signup', 500); // is it a 400 and is a bad request the only reason
         }
         
-        const token = generateToken(newUser._id);
-        setCookies(res, token);
-        return sendRes(res, 201, 'User registered', {id: newUser._id, name: newUser.name, email: newUser.email, age: newUser.age});
+        const accessToken = generateToken(newUser._id, process.env.JWT_ACCESS_SECRET, 'access');
+        const refreshToken = generateToken(newUser._id, process.env.JWT_REFRESH_SECRET);
+        setCookies(res, refreshToken);
+        return sendRes(res, 201, 'User registered', {id: newUser._id, name: newUser.name, email: newUser.email, age: newUser.age, accessToken});
     }
 );
 const logout = asyncHandler(
