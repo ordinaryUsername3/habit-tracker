@@ -44,8 +44,8 @@ const Dashboard = () => {
         <AddHabit />
       </Flex>
       {/* Header */}
-      <Heading size="lg" mb={4} color="teal.700">
-        Welcome Back! {name}
+      <Heading size="2xl" mb={4}>
+        Welcome Back {name}
       </Heading>
 
       {/* Stats Summary */}
@@ -58,7 +58,7 @@ const Dashboard = () => {
           { label: 'Deleted', count: deletedHabits.length, color: 'red.500' }
         ].map((stat, idx) => (
           <Box key={idx} p={4} borderRadius="md" shadow="md">
-            <Text fontWeight="bold" color="gray.700">{stat.label}:</Text>
+            <Text fontWeight="bold" >{stat.label}:</Text>
             <Text fontSize="lg" color={stat.color}>{stat.count}</Text>
           </Box>
         ))}

@@ -31,10 +31,3 @@ export default function AddHabit() {
         </Box>
     )
 }
-
-/* Habit Fields
-- title
-- description
-- status
-- frequency
-- streak */

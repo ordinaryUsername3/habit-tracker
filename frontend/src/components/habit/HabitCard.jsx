@@ -16,7 +16,7 @@ export default function HabitCard({habitId}) {
         <HStack justifyContent='space-between'  width='95%' px={2} py={3} borderRadius={5} backgroundColor='gray.100'>
             <Text id='title'>{title}</Text>
             <HStack>
-            <Text color={isChecked ? 'green': 'orange'} id='status'>{isChecked ? 'Completed': 'Pending'}</Text>
+            <Text >'Pending</Text>
             <Switch.Root colorPalette='green'
             checked={isChecked} onCheckedChange={(e) => setIsChecked(e.checked)}>
                 <Switch.HiddenInput/>

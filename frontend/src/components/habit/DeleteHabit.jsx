@@ -23,7 +23,7 @@ export default function DeleteHabit({habitId}) {
                             <Dialog.Title>Delete Habit</Dialog.Title>
                         </Dialog.Header>
                         <Dialog.Body>
-                            <Text color='red' fontWeight='bold'>Are you sure you want to delete this habit ?</Text>
+                            <Text fontWeight='bold'>Are you sure you want to delete this habit ?</Text>
                         </Dialog.Body>
                         <Dialog.Footer>
                             <Dialog.CloseTrigger asChild>

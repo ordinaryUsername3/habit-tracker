@@ -81,7 +81,7 @@ export default function HabitCategory() {
               borderRadius="md"
               boxShadow="md"
             >
-              <Text fontWeight="semibold" fontSize="md" color="green.800">
+              <Text fontWeight="semibold" fontSize="md">
                 {habit.title}
               </Text>
 
